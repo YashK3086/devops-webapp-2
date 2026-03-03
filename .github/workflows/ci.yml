@@ -1,0 +1,14 @@
+﻿name: CI Pipeline
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build project
+        run: echo "Building the web app..."
+      - name: Generate output logs
+        run: echo "Build successful at $(date)"
