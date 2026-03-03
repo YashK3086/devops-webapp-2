@@ -1,14 +1,25 @@
 ﻿name: CI Pipeline
+
 on:
   push:
     branches: [ "main" ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Build project
         run: echo "Building the web app..."
+
       - name: Generate output logs
         run: echo "Build successful at $(date)"
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: "Build complete for devops-webapp-2! 🚀"
+          SLACK_TITLE: "CI Status"
